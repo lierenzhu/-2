@@ -358,28 +358,62 @@ int pd(char B[])
 }
 void main()
 {
-    float a,b,c,d;
+    float a,b,d;
+	int c;
 	char B[100],E[100];
+	char fp;
+	int isFromFile;
+	FILE *fpRead = fopen("data.txt", "r");
 	do
 	{
-		do
+	printf("请选择输入方式：1.文件输入；2.键盘输入\n");
+	scanf("%d", &isFromFile);
+	if (isFromFile == 2)
+	{
+		
+			do
+			{
+				printf("请输入中缀表达式:\n");
+				B[100] = fflush(stdin);
+				gets_s(B);
+				while (B[0] == '\0')
+				{
+					B[100] = fflush(stdin);
+					gets_s(B);
+				}
+				b = pd(B);
+			} while (b == 0);
+			Mid_post(E, B);
+			printf("后缀表达式为:\n");
+			printf("%s\n", E);
+			a = Ecount(E);
+			printf("结果=%f\n", a);
+			printf("是否继续?是:1否:0\n");
+			scanf("%d", &c);
+			getchar();
+		
+	}
+	else
+	{
+		int i = 0;
+		if (fpRead == NULL)
 		{
-	        printf("请输入中缀表达式:\n");
-			B[100]=fflush(stdin);
-	        gets_s(B);
-	    while(B[0]=='\0')
-        {
-    	    B[100]=fflush(stdin);
-	        gets_s(B);
-        }
-	        b=pd(B);
-	    }while(b==0);
-	    Mid_post(E,B);
-	    printf("后缀表达式为:\n");
-	    printf("%s\n",E);
-	    a=Ecount(E);
-	    printf("结果=%f\n",a);
-	    printf("是否继续?是:1否:0\n");
-	    scanf("%d",&c);
-    }while(c==1);
+			printf("未找到文件...\n");
+		}
+		while (fscanf(fpRead,"%c",&fp) && fp!='#')
+		{
+			B[i] = fp;
+			i++;
+		}
+		B[i] = '#';
+		Mid_post(E, B);
+		printf("后置表达式为：\n");
+		printf("%s\n", E);
+		a = Ecount(E);
+		printf("结果=%f\n", a);
+		printf("是否继续?是:1否:0\n");
+		scanf("%d", &c);
+		getchar();
+	}
+	} while (c == 1);
 } 
