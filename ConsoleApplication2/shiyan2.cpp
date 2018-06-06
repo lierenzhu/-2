@@ -364,13 +364,12 @@ void main()
 	char fp;
 	int isFromFile;
 	FILE *fpRead = fopen("data.txt", "r");
-	do
-	{
 	printf("请选择输入方式：1.文件输入；2.键盘输入\n");
 	scanf("%d", &isFromFile);
 	if (isFromFile == 2)
 	{
-		
+		do
+		{
 			do
 			{
 				printf("请输入中缀表达式:\n");
@@ -391,7 +390,7 @@ void main()
 			printf("是否继续?是:1否:0\n");
 			scanf("%d", &c);
 			getchar();
-		
+		} while (c == 1);
 	}
 	else
 	{
@@ -411,9 +410,6 @@ void main()
 		printf("%s\n", E);
 		a = Ecount(E);
 		printf("结果=%f\n", a);
-		printf("是否继续?是:1否:0\n");
-		scanf("%d", &c);
-		getchar();
-	}
-	} while (c == 1);
+		system("pause");
+	}	
 } 
